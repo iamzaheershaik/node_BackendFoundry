@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete Student</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .danger {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h2 class="danger">Delete Student</h2>
+
+<p>
+  Are you sure you want to delete  
+  <strong><%= student.name %></strong>?
+</p>
+
+<form action="/delete-student/<%= student.id %>" method="POST">
+  <button type="submit">Yes, Delete</button>
+  <a href="/">Cancel</a>
+</form>
+
+</body>
+</html>
+

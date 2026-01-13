@@ -1,37 +1,105 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Students</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 60%;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .pass {
+      color: green;
+      font-weight: bold;
+    }
+
+    .fail {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>Add Student</h2>
+  <h2>Add Student</h2>
 
-<form action="/add-student" method="POST">
-  <input type="text" name="name" placeholder="Name" required />
-  <input type="number" name="age" placeholder="Age" required />
-  <button type="submit">Add</button>
-</form>
+  <form action="/add-student" method="POST">
+    <input type="text" name="name" placeholder="Name" required />
+    <input type="number" name="age" placeholder="Age" required />
+    <input type="text" name="course" placeholder="Course" required />
+    <input type="number" name="marks" placeholder="Marks" required />
+    <button type="submit">Add</button>
+  </form>
 
-<hr>
+  <hr>
 
-<h2>Student List</h2>
+  <h2>Student List</h2>
 
-<table border="1">
-  <tr>
-    <th>Name</th>
-    <th>Age</th>
-  </tr>
+  <% if (students.length===0) { %>
+    <p>No students added yet.</p>
+    <% } else { %>
 
-  <% students.forEach(student => { %>
-    <tr>
-      <td><%= student.name %></td>
-      <td><%= student.age %></td>
-    </tr>
-  <% }) %>
+      <table border="1">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Course</th>
+          <th>Marks</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
 
-</table>
+        <% students.forEach(student=> { %>
+          <tr>
+            <td>
+              <%= student.id %>
+            </td>
+            <td>
+              <%= student.name %>
+            </td>
+            <td>
+              <%= student.age %>
+            </td>
+            <td>
+              <%= student.course %>
+            </td>
+            <td>
+              <%= student.marks %>
+            </td>
+            <td class="<%= student.marks >= 40 ? 'pass' : 'fail' %>">
+              <%= student.marks>= 40 ? 'PASS' : 'FAIL' %>
+            </td>
+            <td class="actions">
+              <a href="/edit-student/<%= student.id %>">Edit</a>
+              <form action="/delete-student/<%= student.id %>" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Are you sure?')">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+      </table>
+
+      <% } %>
 
 </body>
-</html>
 
+</html>
