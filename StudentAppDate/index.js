@@ -31,7 +31,8 @@ app.post("/add-student", (req, res) => {
     res.redirect("/");
 });
 app.get("/edit-student/:id", (req, res) => {
-    const student = students.find(s => s.id == req.params.id);
+    let id = req.params.id;
+    const student = students.find(student => student.id == id);
     if (!student) return res.redirect("/");
     res.render("edit-student", { student });
 });
@@ -39,24 +40,25 @@ app.get("/edit-student/:id", (req, res) => {
 
 app.post("/update-student/:id", (req, res) => {
     const { name, age, course, marks } = req.body;
-
-    students = students.map(s =>
-        s.id == req.params.id
-            ? { ...s, name, age: Number(age), course, marks: Number(marks) }
-            : s
+    let id = req.params.id;
+    students = students.map(student =>
+        student.id == id
+            ? { ...student, name, age: Number(age), course, marks: Number(marks) }
+            : student
     );
-
     res.redirect("/");
 });
 
 
 app.get("/delete-student/:id", (req, res) => {
-    const student = students.find(s => s.id == req.params.id);
+    let id = req.params.id;
+    const student = students.find(student => student.id == id);
     if (!student) return res.redirect("/");
     res.render("delete-student", { student });
 });
 app.post("/delete-student/:id", (req, res) => {
-    students = students.filter(s => s.id != req.params.id);
+    let id = req.params.id;
+    students = students.filter(student => student.id != id);
     res.redirect("/");
 });
 
