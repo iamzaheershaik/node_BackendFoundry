@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit</title>
+</head>
+<body>
+<center>
+    <h2>Edit Student</h2>
+<form action="/update-student/<%= student._id %>" method="post">
+  <input type="text" name="firstName" value="<%= student.firstName %>" />
+  <input type="text" name="lastName" value="<%= student.lastName %>" />
+  <input type="text" name="course" value="<%= student.course %>" />
+  <input type="text" name="email" value="<%= student.email %>" />
+  <button type="submit">Update</button>
+</center>
+</form>
+</body>
+</html>

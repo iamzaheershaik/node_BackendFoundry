@@ -35,7 +35,38 @@
           <td><input type="submit" type="text" value="Add Student"></td>
         </tr>
       </table>
+      <hr>
+      <input type="text" name="search" placeholder="Search Here">
+      <input type="submit" value="Search">
     </form>
+    <br>
+    <table border="1" cellpadding="5">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>FirstName:</th>
+          <th>LastNmae:</th>
+          <th>Email:</th>
+          <th>Course</th>
+          <th>MobileNo:</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach((student, i)=> { %>
+          <tr>
+            <td><%  %></td>
+            <td><%= student.firstName %></td>
+            <td><%= student.lastName %></td>
+            <td><%= student.email %></td>
+            <td><%= student.course %></td>
+            <td><%= student.mobileNo %></td>
+            <td><a href="/edit-student/<%= student._id %>">Edit</a></td>
+            <td><a href="/delete-student/<%= student.id%>">Delete</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
   </center>
 </body>
 </html>
