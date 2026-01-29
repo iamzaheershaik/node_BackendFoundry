@@ -2,19 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit</title>
+  <title>Edit Student</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-<center>
-    <h2>Edit Student</h2>
-<form action="/update-student/<%= student._id %>" method="post">
-  <input type="text" name="firstName" value="<%= student.firstName %>" />
-  <input type="text" name="lastName" value="<%= student.lastName %>" />
-  <input type="text" name="course" value="<%= student.course %>" />
-  <input type="text" name="email" value="<%= student.email %>" />
-  <button type="submit">Update</button>
-</center>
-</form>
+
+<div class="bento-container single">
+
+  <div class="bento-card form-card" style="width: 100%; max-width: 400px;">
+
+    <h2>✏️ Edit Student</h2>
+
+    <form action="/update-student/<%= student._id %>" method="post" class="student-form">
+
+      <label style="font-size: 0.85rem; color:#94a3b8;">First Name</label>
+      <input type="text" name="firstName" value="<%= student.firstName %>" required />
+
+      <label style="font-size: 0.85rem; color:#94a3b8;">Last Name</label>
+      <input type="text" name="lastName" value="<%= student.lastName %>" required />
+
+      <label style="font-size: 0.85rem; color:#94a3b8;">Email</label>
+      <input type="email" name="email" value="<%= student.email %>" required />
+
+      <label style="font-size: 0.85rem; color:#94a3b8;">Course</label>
+      <input type="text" name="course" value="<%= student.course %>" required />
+
+      <label style="font-size: 0.85rem; color:#94a3b8;">Mobile No</label>
+      <input type="tel" name="mobileNo" value="<%= student.mobileNo %>" required />
+
+      <button type="submit" style="margin-top: 10px;">Update Student</button>
+
+    </form>
+
+    <a href="/" class="back-link">⬅ Back to Dashboard</a>
+
+  </div>
+
+</div>
+
 </body>
 </html>

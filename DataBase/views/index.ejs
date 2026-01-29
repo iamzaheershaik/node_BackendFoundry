@@ -3,70 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Info</title>
+  <title>Student Manager</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-  <center>
-    <h2>Student Information</h2>
-    <form action="/add-student" method="post">
-      <table>
-        <tr>
-          <td>FirstName:</td>
-          <td><input type="text" type="text" name="firstName"></td>
-        </tr>
-        <tr>
-          <td>LastName:</td>
-          <td><input type="text" type="text" name="lastName"></td>
-        </tr>
-        <tr>
-          <td>Email:</td>
-          <td><input type="text" type="text" name="email"></td>
-        </tr>
-        <tr>
-          <td>Course:</td>
-          <td><input type="text" type="text" name="course"></td>
-        </tr>
-        <tr>
-          <td>MobileNo:</td>
-          <td><input type="text" type="text" name="mobileNo"></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><input type="submit" type="text" value="Add Student"></td>
-        </tr>
-      </table>
-      <hr>
-      <input type="text" name="search" placeholder="Search Here">
-      <input type="submit" value="Search">
+
+<div class="bento-container">
+
+  <div class="bento-card form-card">
+    <h2>➕ Add Student</h2>
+
+    <form action="/add-student" method="POST" class="student-form">
+      <input name="firstName" placeholder="First Name" required>
+      <input name="lastName" placeholder="Last Name" required>
+      <input name="email" type="email" placeholder="Email Address" required>
+      <input name="course" placeholder="Course Name" required>
+      <input name="mobileNo" type="tel" placeholder="Mobile No" required>
+      <button type="submit">Add Student</button>
     </form>
-    <br>
-    <table border="1" cellpadding="5">
+  </div>
+
+  <div class="bento-card search-card">
+    <h2>🔍 Search</h2>
+    <form method="GET" style="display: flex; gap: 10px;">
+      <input name="search" placeholder="Search by name, email, or course..." style="flex-grow:1;">
+      <button style="width: auto; padding: 0 25px;">Search</button>
+    </form>
+  </div>
+
+  <div class="bento-card table-card">
+    <h2>📋 Student List</h2>
+
+    <table>
       <thead>
         <tr>
           <th>#</th>
-          <th>FirstName:</th>
-          <th>LastNmae:</th>
-          <th>Email:</th>
+          <th>Name</th>
+          <th>Email</th>
           <th>Course</th>
-          <th>MobileNo:</th>
-          <th colspan="2">Actions</th>
+          <th>Mobile</th>
+          <th>Actions</th>
         </tr>
       </thead>
+
       <tbody>
-        <% students.forEach((student, i)=> { %>
+        <% if(students.length > 0) { %>
+          <% students.forEach((student, i) => { %>
           <tr>
-            <td><%  %></td>
-            <td><%= student.firstName %></td>
-            <td><%= student.lastName %></td>
+            <td><%= i+1 %></td>
+            <td><%= student.firstName %> <%= student.lastName %></td>
             <td><%= student.email %></td>
             <td><%= student.course %></td>
             <td><%= student.mobileNo %></td>
-            <td><a href="/edit-student/<%= student._id %>">Edit</a></td>
-            <td><a href="/delete-student/<%= student.id%>">Delete</a></td>
+
+            <td class="actions">
+              <a href="/edit-student/<%= student._id %>" class="icon-btn edit" title="Edit">
+                ✏️
+              </a>
+
+              <form action="/delete-student/<%= student._id %>" method="POST" style="margin:0;">
+                <button class="icon-btn delete" onclick="return confirm('Are you sure you want to delete this student?')" title="Delete">
+                  🗑
+                </button>
+              </form>
+            </td>
           </tr>
-        <% }) %>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="6" style="text-align:center; padding: 30px; color: #64748b;">
+              No students found. Add one to get started!
+            </td>
+          </tr>
+        <% } %>
       </tbody>
     </table>
-  </center>
+
+  </div>
+
+</div>
+
 </body>
 </html>
+
+
