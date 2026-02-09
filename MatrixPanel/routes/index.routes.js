@@ -1,7 +1,6 @@
 const express = require("express");
-const { dashboardPage } = require("../controller/index.controller");
+const { dashboard } = require("../controller/index.controller");
 const routes = express.Router();
-routes.get("/", dashboardPage);
-routes.get("/admin", require("./admin.routes"));
-routes.get();
+routes.get("/", dashboard);
+routes.use("/admin", require("./admin.routes"));
 module.exports = routes;

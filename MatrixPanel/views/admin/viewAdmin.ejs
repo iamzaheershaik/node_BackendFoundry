@@ -1,0 +1,60 @@
+<%- include("../header") %>
+<div class="page-wrapper">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <h4 class="page-title">Admin List</h4>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% if (admins && admins.length > 0) { %>
+
+                            <% admins.forEach((admin, index) => { %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+
+                                    <td>
+                                        <% if (admin.profileImage) { %>
+                                            <img src="<%= admin.profileImage %>" width="50" height="50" style="border-radius:50%;">
+                                        <% } else { %>
+                                            No Image
+                                        <% } %>
+                                    </td>
+
+                                    <td><%= admin.name %></td>
+                                    <td><%= admin.email %></td>
+                                </tr>
+                            <% }) %>
+
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    No Admin Found
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include("../footer") %>
