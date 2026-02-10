@@ -1,10 +1,6 @@
 const Admin = require("../model/admin.model");
 const fs = require("fs");
 const path = require("path");
-
-/* ===============================
-   View All Admins
-================================ */
 exports.viewAllAdmins = async (req, res) => {
   try {
     const admins = await Admin.find();
@@ -14,10 +10,6 @@ exports.viewAllAdmins = async (req, res) => {
     res.redirect("/");
   }
 };
-
-/* ===============================
-   Add Admin Page
-================================ */
 exports.addAdminPage = (req, res) => {
   try {
     res.render("admin/addAdmin");
@@ -26,10 +18,6 @@ exports.addAdminPage = (req, res) => {
     res.redirect("/");
   }
 };
-
-/* ===============================
-   Add Admin (POST)
-================================ */
 exports.addAdmin = async (req, res) => {
   try {
     let imagePath = "";
@@ -46,13 +34,9 @@ exports.addAdmin = async (req, res) => {
     res.redirect("/admin/viewAdmin");
   } catch (error) {
     console.log(error);
-    res.redirect("/admin/addAdmin");
+    res.redirect("admin/addAdmin");
   }
 };
-
-/* ===============================
-   Delete Admin
-================================ */
 exports.deleteAdmin = async (req, res) => {
   try {
     const adminId = req.params.id;
@@ -65,7 +49,7 @@ exports.deleteAdmin = async (req, res) => {
     if (admin.profileImage) {
       const imageFullPath = path.join(
         __dirname,
-        "../../public",
+        "../public",
         admin.profileImage
       );
 
@@ -81,23 +65,15 @@ exports.deleteAdmin = async (req, res) => {
     res.redirect("/admin/viewAdmin");
   }
 };
-
-/* ===============================
-   Edit Admin Page
-================================ */
 exports.editAdminPage = async (req, res) => {
   try {
     const admin = await Admin.findById(req.params.id);
-    res.render("admin/edit-admin", { admin });
+    res.render("admin/editAdmin", { admin });
   } catch (error) {
     console.log(error);
     res.redirect("/admin/viewAdmin");
   }
 };
-
-/* ===============================
-   Update Admin
-================================ */
 exports.updateAdmin = async (req, res) => {
   try {
     const adminId = req.params.id;
@@ -110,7 +86,7 @@ exports.updateAdmin = async (req, res) => {
       if (admin.profileImage) {
         const oldImagePath = path.join(
           __dirname,
-          "../../public",
+          "../public",
           admin.profileImage
         );
 
@@ -121,7 +97,6 @@ exports.updateAdmin = async (req, res) => {
 
       updatedData.profileImage = `uploads/${req.file.filename}`;
     }
-
     await Admin.findByIdAndUpdate(adminId, updatedData);
     res.redirect("/admin/viewAdmin");
   } catch (error) {

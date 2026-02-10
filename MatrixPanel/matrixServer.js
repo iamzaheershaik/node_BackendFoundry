@@ -9,8 +9,8 @@ dbConnect();
 //middleWare
 app.set("view engine", "ejs");
 app.use(express.urlencoded({}));
-app.use(express.static("public"));
-app.use("/uploads", express.static("uploads"));
+app.use(express.static('public'));
+app.use('/uploads', express.static('public/uploads'));
 
 //routes
 app.use("/", require("./routes/index.routes"));

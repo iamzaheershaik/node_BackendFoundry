@@ -1,0 +1,116 @@
+<%- include('../header') %>
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Edit Admin</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/viewAdmin">Admins</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <form class="form-horizontal" action="/admin/updateAdmin/<%= admin._id %>" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <h4 class="card-title">Personal Info</h4>
+                            
+                            <div class="form-group row">
+                                <label for="fname" class="col-sm-3 text-right control-label col-form-label">First Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="firstname" id="fname" value="<%= admin.firstname %>" placeholder="First Name Here" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="lastname" id="lname" value="<%= admin.lastname %>" placeholder="Last Name Here" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-3 text-right control-label col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" name="email" id="email" value="<%= admin.email %>" placeholder="Email Here" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-3 text-right control-label col-form-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Leave blank to keep current password">
+                                    <small class="form-text text-muted">Only fill this if you want to change the password</small>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Gender</label>
+                                <div class="col-md-9">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" value="Male" id="customControlValidation1" name="gender" <%= admin.gender === 'Male' ? 'checked' : '' %> required>
+                                        <label class="custom-control-label" for="customControlValidation1">Male</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" value="Female" id="customControlValidation2" name="gender" <%= admin.gender === 'Female' ? 'checked' : '' %> required>
+                                        <label class="custom-control-label" for="customControlValidation2">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="mobileNo" id="cono1" value="<%= admin.mobileNo %>" placeholder="Contact No Here" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Current Image</label>
+                                <div class="col-md-9">
+                                    <% if (admin.profileImage) { %>
+                                        <img src="/uploads/<%= admin.profileImage %>" alt="Current Profile" class="img-thumbnail mb-2" width="150" id="currentImage">
+                                        <input type="hidden" name="oldImage" value="<%= admin.profileImage %>">
+                                    <% } else { %>
+                                        <p class="text-muted">No image uploaded</p>
+                                    <% } %>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">New Image</label>
+                                <div class="col-md-9">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="profileImage" id="validatedCustomFile" accept="image/*">
+                                        <label class="custom-file-label" for="validatedCustomFile">Choose new image...</label>
+                                    </div>
+                                    <small class="form-text text-muted">Leave blank to keep current image</small>
+                                    <img id="imagePreview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-primary">Update Admin</button>
+                                <a href="/admin/viewAdmin" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('../footer') %>
+</div>
